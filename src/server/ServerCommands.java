@@ -8,4 +8,5 @@ public interface ServerCommands {
     int DELETE_GENRE = 4;
     int ADD_GENRE = 5;
     int FAILED_ACTION = 6;
+    int ADD_GENRE_SUCCESS = 7;
 }
