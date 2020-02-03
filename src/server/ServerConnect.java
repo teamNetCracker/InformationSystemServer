@@ -51,6 +51,7 @@ public class ServerConnect extends Thread {
         try {
             out.writeObject(word);
             out.flush();
+            System.out.println("Send message");
         } catch (IOException ignored) {
         }
     }
