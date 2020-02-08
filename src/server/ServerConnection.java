@@ -9,13 +9,13 @@ import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ServerConnect extends Thread {
+public class ServerConnection extends Thread {
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private Set<Callback> callbacks = new HashSet<>();
 
-    public ServerConnect(Socket socket) throws IOException {
+    public ServerConnection(Socket socket) throws IOException {
         this.socket = socket;
         in = new ObjectInputStream(socket.getInputStream());
         out = new ObjectOutputStream(socket.getOutputStream());
@@ -32,7 +32,7 @@ public class ServerConnect extends Thread {
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Loss of connection to one of the clients");
                 e.printStackTrace();
-                downServer();
+                //downServer();
                 break;
             }
         }
@@ -56,6 +56,7 @@ public class ServerConnect extends Thread {
         }
     }
 
+    /*
     public void downServer() {
         try {
             callbacks.clear();
@@ -63,17 +64,19 @@ public class ServerConnect extends Thread {
                 in.close();
                 out.close();
                 socket.close();
-                for (ServerConnect vr : Server.serverList) {
+                for (ServerConnection vr : ServerEP.connectionList) {
                     if (equals(vr)) vr.interrupt();
-                    Server.serverList.remove(this);
+                    ServerEP.connectionList.remove(this);
                 }
             }
         } catch (IOException ignored) {
         }
     }
 
+     */
+
 
     public interface Callback {
-        void onReceive(ServerMessage message, ServerConnect server);
+        void onReceive(ServerMessage message, ServerConnection server);
     }
 }

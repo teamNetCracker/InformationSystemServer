@@ -1,22 +1,36 @@
 package model;
 
 import data.GenreDataObject;
+import server.EventListener;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-public class GenreModel {
-    private List<GenreDataObject> arrGenre;
+public class GenreModel implements Observable {
+    private LinkedList<GenreDataObject> arrGenre;
+    private List<EventListener> listeners = new LinkedList<>();
+    ObjectInputStream inputStream;
+    ObjectOutputStream outputStream;
 
-    public void setArrGenre(List<GenreDataObject> arrGenre) {
-        this.arrGenre = arrGenre;
+    public GenreModel(String dataBase) throws IOException, ClassNotFoundException {
+        this.outputStream = new ObjectOutputStream(new FileOutputStream(dataBase));
+        arrGenre = new LinkedList<>();
+        arrGenre.add(new GenreDataObject("Helo"));
+        outputStream.writeObject(arrGenre);
+        this.inputStream = new ObjectInputStream(new FileInputStream(dataBase));
+        arrGenre = (LinkedList<GenreDataObject>) inputStream.readObject();
     }
 
-    public GenreModel() {
-        arrGenre = new ArrayList<>();
+    public void saveData()  {
+        try {
+            outputStream.writeObject(arrGenre);
+        } catch (IOException e) {
+            System.out.println("Can't write to File");
+            e.printStackTrace();
+        }
     }
 
     public List<GenreDataObject> getAllGenres() {
@@ -31,6 +45,10 @@ public class GenreModel {
         }
         GenreDataObject newGenre = new GenreDataObject(UUID.randomUUID().toString(), genreTitle);
         arrGenre.add(newGenre);
+        saveData();
+        for (EventListener listener : listeners) {
+            listener.update();
+        }
         return newGenre;
     }
 
@@ -47,6 +65,10 @@ public class GenreModel {
         for (GenreDataObject genre : arrGenre) {
             if (genre.getId().equals(id)) {
                 arrGenre.remove(genre);
+                saveData();
+                for (EventListener listener : listeners) {
+                    listener.update();
+                }
                 break;
             }
         }
@@ -57,21 +79,25 @@ public class GenreModel {
         for (GenreDataObject genreDataObject : arrGenre) {
             if (genreDataObject.getId().equals(id)) {
                 genreDataObject.setTitle(newGenreTitle);
+                saveData();
             }
         }
-
+        for (EventListener listener : listeners) {
+            listener.update();
+        }
     }
 
     public void setGenre(String oldGenre, String newGenre) {
         for (GenreDataObject genres : arrGenre) {
             if (genres.getTitle().equals(oldGenre)) {
                 genres.setTitle(newGenre);
+                saveData();
                 break;
             }
         }
     }
 
-    public void addToArrGenre(List<GenreDataObject> addedArrGenres) {
+    public void updateGenreArr(List<GenreDataObject> addedArrGenres) {
 
         if (!arrGenre.isEmpty()) {
             addedArrGenres.removeAll(arrGenre);
@@ -92,8 +118,20 @@ public class GenreModel {
         }
 
          */
-
+        saveData();
+        for (EventListener listener : listeners) {
+            listener.update();
+        }
     }
 
+    @Override
+    public void subscribe(EventListener eventListener) {
+        listeners.add(eventListener);
+    }
+
+    @Override
+    public void unsubscribe(EventListener eventListener) {
+        listeners.remove(eventListener);
+    }
 
 }
