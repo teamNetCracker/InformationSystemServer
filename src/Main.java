@@ -10,8 +10,6 @@ public class Main {
     public static void main(String[] args){
         try {
             //DataSaver d = new DataSaver();
-            File trackDataBase = new File(args[0]);
-            File genreDataBase = new File(args[1]);
 
             TrackModel trackModel = new TrackModel(args[0]);
             GenreModel genreModel = new GenreModel(args[1]);

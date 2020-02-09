@@ -1,5 +1,6 @@
 package server;
 
+import model.FullModel;
 import net.ServerMessage;
 
 import java.io.IOException;
@@ -7,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class ServerConnection extends Thread {
@@ -47,12 +50,13 @@ public class ServerConnection extends Thread {
         callbacks.remove(callback);
     }
 
-    public void send(ServerMessage word) {
+    public void send(List word) {
         try {
             out.writeObject(word);
             out.flush();
             System.out.println("Send message");
         } catch (IOException ignored) {
+            ignored.printStackTrace();
         }
     }
 

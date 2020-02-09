@@ -73,7 +73,9 @@ public class ServerEP implements EventListener {
     public void update() {
         FullModel fullModel = new FullModel(trackModel.getAllTracks(), genreModel.getAllGenres());
         for(ServerConnection serverConnection : connectionList){
-            serverConnection.send(new ServerMessage(ServerCommands.CONNECT, fullModel));
+            //serverConnection.send(new ServerMessage(ServerCommands.CONNECT, fullModel));
+            serverConnection.send(trackModel.getAllTracks());
+            System.out.println("Sending tracks:" + trackModel.getAllTracks().size());
         }
     }
 }

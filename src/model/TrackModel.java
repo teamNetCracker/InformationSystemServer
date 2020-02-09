@@ -18,13 +18,12 @@ public class TrackModel implements Observable {
 
     public TrackModel(String dataBase) {
         try {
-            this.outputStream = new ObjectOutputStream(new FileOutputStream(dataBase));
-            arrTrack = new LinkedList<TrackDataObject>();
-            arrTrack.add(new TrackDataObject("1", "dsf", "df", "sd", new GenreDataObject("fds"), 1));
-            outputStream.writeObject(arrTrack);
+            //arrTrack = new LinkedList<TrackDataObject>();
             this.inputStream = new ObjectInputStream(new FileInputStream(dataBase));
-            //Integer chislo = (Integer) inputStream.readObject();
             arrTrack = (List<TrackDataObject>) inputStream.readObject();
+            inputStream.close();
+            this.outputStream = new ObjectOutputStream(new FileOutputStream(dataBase));
+            System.out.println(arrTrack.size());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -36,6 +35,7 @@ public class TrackModel implements Observable {
     public void saveData()  {
         try {
             outputStream.writeObject(arrTrack);
+            System.out.println("Save Done");
         } catch (IOException e) {
             System.out.println("Can't write to File");
             e.printStackTrace();
@@ -54,6 +54,7 @@ public class TrackModel implements Observable {
                 throw new IllegalArgumentException("This track already exists");
         }
         arrTrack.add(newTrack);
+        System.out.println(arrTrack.size());
         saveData();
         for (EventListener listener : listeners) {
             listener.update();
