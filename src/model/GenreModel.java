@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class GenreModel implements Observable {
-    private LinkedList<GenreDataObject> arrGenre;
+    private List<GenreDataObject> arrGenre;
     private List<EventListener> listeners = new LinkedList<>();
     ObjectInputStream inputStream;
     ObjectOutputStream outputStream;
@@ -21,7 +21,7 @@ public class GenreModel implements Observable {
         arrGenre.add(new GenreDataObject("Helo"));
         outputStream.writeObject(arrGenre);
         this.inputStream = new ObjectInputStream(new FileInputStream(dataBase));
-        arrGenre = (LinkedList<GenreDataObject>) inputStream.readObject();
+        arrGenre = (List<GenreDataObject>) inputStream.readObject();
     }
 
     public void saveData()  {

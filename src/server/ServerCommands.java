@@ -9,5 +9,5 @@ public interface ServerCommands {
     int ADD_GENRE = 5;
     int FAILED_ACTION = 6;
     int ADD_GENRE_SUCCESS = 7;
-    int CONNECT = 8;
+    int UPDATE_DATA = 8;
 }

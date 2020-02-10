@@ -54,8 +54,8 @@ public class ServerEP implements EventListener {
     private void onReceive(ServerMessage serverMessage, ServerConnection serverConnection) {
         switch (serverMessage.getCommand()){
             case ServerCommands.DELETE_TRACK: {
-                TrackDataObject trackDataObject = (TrackDataObject) serverMessage.getData();
-                trackModel.removeTrack(trackDataObject.getId());
+                String id = (String) serverMessage.getData();
+                trackModel.removeTrack(id);
                 break;
             }
             case ServerCommands.ADD_TRACK: {
@@ -63,8 +63,9 @@ public class ServerEP implements EventListener {
                 trackModel.addTrack(trackDataObject.getId(), trackDataObject.getTitle(), trackDataObject.getPerformer(), trackDataObject.getAlbum(), trackDataObject.getGenre(), trackDataObject.getDuration());
                 break;
             }
-            case ServerCommands.CHANGE_GENRE: {
-
+            case ServerCommands.UPDATE_DATA: {
+                FullModel fullModel = new FullModel(trackModel.getAllTracks(), genreModel.getAllGenres());
+                serverConnection.send(new ServerMessage(ServerCommands.UPDATE_DATA, fullModel));
             }
         }
     }
@@ -73,9 +74,9 @@ public class ServerEP implements EventListener {
     public void update() {
         FullModel fullModel = new FullModel(trackModel.getAllTracks(), genreModel.getAllGenres());
         for(ServerConnection serverConnection : connectionList){
-            //serverConnection.send(new ServerMessage(ServerCommands.CONNECT, fullModel));
-            serverConnection.send(new ServerMessage(ServerCommands.CONNECT, fullModel));
-            System.out.println("Sending tracks:" + trackModel.getAllTracks().size());
+            //serverConnection.send(new ServerMessage(ServerCommands.UPDATE_DATA, fullModel));
+            serverConnection.send(new ServerMessage(ServerCommands.UPDATE_DATA, fullModel));
+            System.out.println("Sending tracks:" + fullModel.getTackListArr().size());
         }
     }
 }
