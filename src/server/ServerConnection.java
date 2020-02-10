@@ -50,7 +50,7 @@ public class ServerConnection extends Thread {
         callbacks.remove(callback);
     }
 
-    public void send(List word) {
+    public void send(ServerMessage word) {
         try {
             out.writeObject(word);
             out.flush();
