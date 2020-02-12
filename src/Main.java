@@ -15,6 +15,8 @@ public class Main {
             GenreModel genreModel = new GenreModel(args[1]);
 
             ServerEP serverEP = new ServerEP(genreModel, trackModel);
+            genreModel.subscribe(serverEP);
+            trackModel.subscribe(serverEP);
             serverEP.start();
 
         } catch (IOException e) {

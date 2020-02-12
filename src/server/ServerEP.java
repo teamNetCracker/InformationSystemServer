@@ -22,8 +22,6 @@ public class ServerEP implements EventListener {
     public ServerEP(GenreModel genreModel, TrackModel trackModel) {
         this.genreModel = genreModel;
         this.trackModel = trackModel;
-        genreModel.subscribe(this);
-        trackModel.subscribe(this);
     }
 
     public void start() throws IOException {
