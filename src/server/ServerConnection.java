@@ -54,6 +54,7 @@ public class ServerConnection extends Thread {
         try {
             out.writeObject(word);
             out.flush();
+            out.reset();
             System.out.println("Send message");
         } catch (IOException ignored) {
             ignored.printStackTrace();
