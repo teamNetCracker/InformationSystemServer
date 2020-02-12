@@ -1,4 +1,4 @@
-//import data.DataSaver;
+import data.DataReset;
 import model.GenreModel;
 import model.TrackModel;
 import server.ServerEP;
@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args){
         try {
-            //DataSaver d = new DataSaver();
+            DataReset d = new DataReset();
 
             TrackModel trackModel = new TrackModel(args[0]);
             GenreModel genreModel = new GenreModel(args[1]);

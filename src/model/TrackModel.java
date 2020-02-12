@@ -13,16 +13,16 @@ import java.util.UUID;
 public class TrackModel implements Observable {
     private List<TrackDataObject> arrTrack;
     private List<EventListener> listeners = new LinkedList<>();
-    ObjectInputStream inputStream;
-    ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
 
-    public TrackModel(String dataBase) {
+    public TrackModel(String dataSourcePath) {
         try {
-            //arrTrack = new LinkedList<TrackDataObject>();
-            this.inputStream = new ObjectInputStream(new FileInputStream(dataBase));
+            File dataSource = new File(dataSourcePath);
+            this.inputStream = new ObjectInputStream(new FileInputStream(dataSourcePath));
             arrTrack = (List<TrackDataObject>) inputStream.readObject();
             inputStream.close();
-            this.outputStream = new ObjectOutputStream(new FileOutputStream(dataBase));
+            this.outputStream = new ObjectOutputStream(new FileOutputStream(dataSourcePath));
             System.out.println(arrTrack.size());
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,10 +49,6 @@ public class TrackModel implements Observable {
     public void addTrack(String id, String title, String performer, String album, GenreDataObject genre, Integer duration) {
         id = UUID.randomUUID().toString();
         TrackDataObject newTrack = new TrackDataObject(id, title, performer, album, genre, duration);
-        for (TrackDataObject track : arrTrack) {
-            if (track.equals(newTrack))
-                throw new IllegalArgumentException("This track already exists");
-        }
         arrTrack.add(newTrack);
         System.out.println(arrTrack.size());
         saveData();
@@ -63,25 +59,10 @@ public class TrackModel implements Observable {
 
     public void updateTrackArr(List<TrackDataObject> addedArrTrack) {
         if (!arrTrack.isEmpty()) {
-            addedArrTrack.removeAll(arrTrack);
+            arrTrack.removeAll(arrTrack);
         }
         arrTrack.addAll(addedArrTrack);
         saveData();
-        /*for (TrackDataObject addedTrack : addedArrTrack) {
-            boolean isDuplicate = false;
-            for (TrackDataObject trackInStorage : storageTracks) {
-                if (addedTrack.getId().equals(trackInStorage.getId())) {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-            if (!isDuplicate) {
-                arrTrack.add(addedTrack);
-            }
-
-        }
-
-         */
         for (EventListener listener : listeners) {
             listener.update();
         }

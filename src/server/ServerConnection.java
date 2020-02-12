@@ -35,7 +35,7 @@ public class ServerConnection extends Thread {
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Loss of connection to one of the clients");
                 e.printStackTrace();
-                //downServer();
+                downServer();
                 break;
             }
         }
@@ -60,7 +60,7 @@ public class ServerConnection extends Thread {
         }
     }
 
-    /*
+
     public void downServer() {
         try {
             callbacks.clear();
@@ -68,16 +68,17 @@ public class ServerConnection extends Thread {
                 in.close();
                 out.close();
                 socket.close();
+                /*
                 for (ServerConnection vr : ServerEP.connectionList) {
                     if (equals(vr)) vr.interrupt();
                     ServerEP.connectionList.remove(this);
                 }
+
+                 */
             }
         } catch (IOException ignored) {
         }
     }
-
-     */
 
 
     public interface Callback {

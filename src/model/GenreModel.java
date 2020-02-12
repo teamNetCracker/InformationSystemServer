@@ -16,12 +16,18 @@ public class GenreModel implements Observable {
     ObjectOutputStream outputStream;
 
     public GenreModel(String dataBase) throws IOException, ClassNotFoundException {
-        this.outputStream = new ObjectOutputStream(new FileOutputStream(dataBase));
-        arrGenre = new LinkedList<>();
-        arrGenre.add(new GenreDataObject("Helo"));
-        outputStream.writeObject(arrGenre);
-        this.inputStream = new ObjectInputStream(new FileInputStream(dataBase));
-        arrGenre = (List<GenreDataObject>) inputStream.readObject();
+        try {
+            //arrTrack = new LinkedList<TrackDataObject>();
+            this.inputStream = new ObjectInputStream(new FileInputStream(dataBase));
+            arrGenre = (List<GenreDataObject>) inputStream.readObject();
+            inputStream.close();
+            this.outputStream = new ObjectOutputStream(new FileOutputStream(dataBase));
+            System.out.println(arrGenre.size());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveData()  {
