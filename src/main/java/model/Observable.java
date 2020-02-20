@@ -1,6 +1,6 @@
-package model;
+package main.java.model;
 
-import server.EventListener;
+import main.java.server.EventListener;
 
 public interface Observable {
     void subscribe(EventListener eventListener);

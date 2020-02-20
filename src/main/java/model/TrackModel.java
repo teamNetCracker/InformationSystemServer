@@ -1,8 +1,8 @@
-package model;
+package main.java.model;
 
-import data.GenreDataObject;
-import data.TrackDataObject;
-import server.EventListener;
+import main.java.data.GenreDataObject;
+import main.java.data.TrackDataObject;
+import main.java.server.EventListener;
 
 
 import java.io.*;

@@ -1,9 +1,10 @@
-import data.DataReset;
-import model.GenreModel;
-import model.TrackModel;
-import server.ServerEP;
+package main.java;
 
-import java.io.File;
+import main.java.data.DataReset;
+import main.java.model.GenreModel;
+import main.java.model.TrackModel;
+import main.java.server.ServerEP;
+
 import java.io.IOException;
 
 public class Main {

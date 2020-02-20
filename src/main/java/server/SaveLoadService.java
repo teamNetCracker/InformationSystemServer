@@ -1,7 +1,7 @@
-package server;
+package main.java.server;
 
-import data.GenreDataObject;
-import data.TrackDataObject;
+import main.java.data.GenreDataObject;
+import main.java.data.TrackDataObject;
 
 import java.io.*;
 import java.util.List;

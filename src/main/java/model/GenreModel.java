@@ -1,10 +1,9 @@
-package model;
+package main.java.model;
 
-import data.GenreDataObject;
-import server.EventListener;
+import main.java.data.GenreDataObject;
+import main.java.server.EventListener;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;

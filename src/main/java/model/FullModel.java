@@ -1,7 +1,7 @@
-package model;
+package main.java.model;
 
-import data.GenreDataObject;
-import data.TrackDataObject;
+import main.java.data.GenreDataObject;
+import main.java.data.TrackDataObject;
 
 import java.io.Serializable;
 import java.util.List;
