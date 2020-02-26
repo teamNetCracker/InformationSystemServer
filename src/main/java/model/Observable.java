@@ -1,4 +1,4 @@
-package main.java.model;
+package model;
 
 import main.java.server.EventListener;
 

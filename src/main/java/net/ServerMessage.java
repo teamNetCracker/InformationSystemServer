@@ -1,4 +1,4 @@
-package main.java.net;
+package net;
 
 import java.io.Serializable;
 

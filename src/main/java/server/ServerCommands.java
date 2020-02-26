@@ -1,4 +1,4 @@
-package main.java.server;
+package server;
 
 public interface ServerCommands {
     int CHANGE_TRACK = 0;

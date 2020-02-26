@@ -1,6 +1,7 @@
-package main.java.model;
+package model;
 
-import main.java.data.GenreDataObject;
+
+import data.GenreDataObject;
 import main.java.server.EventListener;
 
 import java.io.*;
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-public class GenreModel implements Observable {
+public class GenreModel implements model.Observable {
     private List<GenreDataObject> arrGenre;
     private List<EventListener> listeners = new LinkedList<>();
     ObjectInputStream inputStream;

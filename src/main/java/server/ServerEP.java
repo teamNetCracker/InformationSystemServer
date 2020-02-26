@@ -1,10 +1,10 @@
-package main.java.server;
+package server;
 
-import main.java.data.TrackDataObject;
-import main.java.model.FullModel;
-import main.java.model.GenreModel;
-import main.java.model.TrackModel;
-import main.java.net.ServerMessage;
+import data.TrackDataObject;
+import model.FullModel;
+import model.GenreModel;
+import model.TrackModel;
+import net.ServerMessage;
 
 import java.io.*;
 import java.net.ServerSocket;
