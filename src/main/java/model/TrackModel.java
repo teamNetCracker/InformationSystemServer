@@ -2,7 +2,7 @@ package model;
 
 import data.GenreDataObject;
 import data.TrackDataObject;
-import main.java.server.EventListener;
+import server.EventListener;
 
 
 import java.io.*;

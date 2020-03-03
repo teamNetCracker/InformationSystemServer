@@ -2,7 +2,7 @@ package model;
 
 
 import data.GenreDataObject;
-import main.java.server.EventListener;
+import server.EventListener;
 
 import java.io.*;
 import java.util.LinkedList;
