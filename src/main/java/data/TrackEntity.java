@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tracks", schema = "database", catalog = "")
-public class TracksEntity {
+public class TrackEntity {
     private int idTracks;
     private String title;
     private String performer;
@@ -67,7 +67,7 @@ public class TracksEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TracksEntity that = (TracksEntity) o;
+        TrackEntity that = (TrackEntity) o;
         return idTracks == that.idTracks &&
                 duration == that.duration &&
                 Objects.equals(title, that.title) &&

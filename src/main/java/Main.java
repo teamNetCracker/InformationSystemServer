@@ -1,14 +1,10 @@
 
 import data.GenreEntity;
-import data.TracksEntity;
+import data.TrackEntity;
+import model.DataBase;
 import model.GenreDAO;
 import model.TrackDAO;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import utils.HibernateSessionFactory;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Main {
@@ -16,7 +12,13 @@ public class Main {
     {
         GenreDAO Dao = new GenreDAO();
         TrackDAO DaoT = new TrackDAO();
-        List test =  DaoT.getTracksByGenre(2);
+        DataBase dataBase = new DataBase();
+        dataBase.setTrackDAO(DaoT);
+        dataBase.setGenreDAO(Dao);
+        GenreEntity genreEntity = new GenreEntity();
+        genreEntity.setName("Rock");
+        dataBase.addGenre(genreEntity);
+
 
        /* TracksEntity tracksEntity1 = new TracksEntity();
         tracksEntity1.setGenreByIdGenre(genreEntity);
@@ -29,7 +31,7 @@ public class Main {
         */
 
        //  GenreEntity ss = (GenreEntity) Dao.searchGenre("Rock");
-        int i = 5;
+
 
 
        /* try {
