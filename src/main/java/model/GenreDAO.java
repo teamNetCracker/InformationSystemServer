@@ -72,17 +72,17 @@ public class GenreDAO
             }
         }
     }
-    public Object getGenre(int id)
+    public GenreEntity getGenre(int id)
     {
 
             Session session = null;
-            Object genre = null;
+            GenreEntity genre = null;
             try
             {
                 session = HibernateSessionFactory.getSessionFactory().openSession();
                 session.beginTransaction();
                 Query query = session.createQuery("from GenreEntity where idGenre = :id").setInteger("id", id);
-                genre = query.uniqueResult();
+                genre = (GenreEntity) query.uniqueResult();
                 session.getTransaction().commit();
             }
             catch (Exception e)
@@ -117,7 +117,7 @@ public class GenreDAO
             }
         }
     }
-    public Collection getAllGenres()
+    public List<GenreEntity> getAllGenres()
     {
         Session session = null;
         List genres = new LinkedList<GenreEntity>();
@@ -138,16 +138,16 @@ public class GenreDAO
         }
         return genres;
     }
-    public Object searchGenre(String title)
+    public GenreEntity searchGenre(String title)
     {
         Session session = null;
-        Object genre = null;
+        GenreEntity genre = null;
         try
         {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
             Query query = session.createQuery("from GenreEntity where name = :title").setString("title", title);
-            genre = query.uniqueResult();
+            genre = (GenreEntity) query.uniqueResult();
             session.getTransaction().commit();
         }
         catch (Exception e)

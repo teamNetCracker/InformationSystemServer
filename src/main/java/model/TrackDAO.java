@@ -1,18 +1,19 @@
 package model;
 
 import data.GenreEntity;
-import data.TracksEntity;
+import data.TrackEntity;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import utils.HibernateSessionFactory;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 public class TrackDAO
 {
-    public void addTrack(TracksEntity newTrack)
+    public void addTrack(TrackEntity newTrack)
     {
         Session session = null;
         try {
@@ -30,7 +31,7 @@ public class TrackDAO
             }
         }
     }
-    public void updateTrack(TracksEntity track)
+    public void updateTrack(TrackEntity track)
     {
         Session session = null;
         try
@@ -51,7 +52,7 @@ public class TrackDAO
             }
         }
     }
-    public List searchTrack(String title)
+    public List<TrackEntity> searchTrack(String title)
     {
         Session session = null;
         List tracks = new LinkedList();
@@ -75,18 +76,20 @@ public class TrackDAO
         }
         return tracks;
     }
-    public Object getTrack(int id)
+    public List<TrackEntity> searchTracksByGenre(String titleGenre)
     {
-
         Session session = null;
-        Object genre = null;
+        List<TrackEntity> tracks = new LinkedList();
         try
         {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            Query query = session.createQuery("from TracksEntity where idTracks = :id")
-                    .setInteger("id", id);
-            genre = query.uniqueResult();
+            Criteria genreCriteria = session.createCriteria(GenreEntity.class);
+            genreCriteria.add(Restrictions.eq("name", titleGenre ));
+            GenreEntity genre = (GenreEntity) genreCriteria.uniqueResult();
+            Criteria tracksCriteria = session.createCriteria(TrackEntity.class);
+            tracksCriteria.add(Restrictions.eq("genreByIdGenre", genre));
+            tracks = tracksCriteria.list();
             session.getTransaction().commit();
         }
         catch (Exception e)
@@ -98,7 +101,32 @@ public class TrackDAO
                 session.close();
             }
         }
-        return genre;
+        return tracks;
+    }
+    public TrackEntity getTrack(int id)
+    {
+
+        Session session = null;
+        TrackEntity track = null;
+        try
+        {
+            session = HibernateSessionFactory.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query query = session.createQuery("from TracksEntity where idTracks = :id")
+                    .setInteger("id", id);
+            track = (TrackEntity) query.uniqueResult();
+            session.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return track;
     }
     public void deleteTrack(int id)
     {
@@ -129,7 +157,7 @@ public class TrackDAO
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            tracks = session.createCriteria(TracksEntity.class).list();
+            tracks = session.createCriteria(TrackEntity.class).list();
             session.getTransaction().commit();
         }
         catch (Exception e)
@@ -143,15 +171,16 @@ public class TrackDAO
         }
         return tracks;
     }
-    public List getTracksByGenre(int idGenre) {
+    public List<TrackEntity> searchTracksByGenre(int idGenre) {
         Session session = null;
-        List listGenres = new LinkedList<>();
+        List tracks = new LinkedList<>();
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            Query query = session.createQuery("from TracksEntity where idGenre = :idGenre")
-                    .setInteger("idGenre", idGenre);
-            listGenres = query.list();
+            GenreEntity genre = session.load(GenreEntity.class, idGenre);
+            Criteria tracksCriteria = session.createCriteria(TrackEntity.class);
+            tracksCriteria.add(Restrictions.eq("genreByIdGenre", genre));
+            tracks = tracksCriteria.list();
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,6 +189,6 @@ public class TrackDAO
                 session.close();
             }
         }
-        return listGenres;
+        return tracks;
     }
 }
