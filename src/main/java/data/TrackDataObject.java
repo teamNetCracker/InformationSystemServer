@@ -86,13 +86,13 @@ public boolean equals(Object object) {
 
     @Override
     public String toString() {
-        return "TrackDataObject{" +
-                "title='" + title + '\'' +
-                ", performer='" + performer + '\'' +
-                ", album='" + album + '\'' +
+        return "TrackDataObject[" +
+                "title=" + title + '\'' +
+                ", performer=" + performer + '\'' +
+                ", album=" + album + '\'' +
                 ", genre=" + genre +
                 ", duration=" + duration +
-                '}';
+                ']';
     }
 
 
