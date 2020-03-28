@@ -1,12 +1,9 @@
 
 import data.GenreEntity;
-import data.TrackEntity;
 import model.DataBase;
 import model.GenreDAO;
 import model.TrackDAO;
 import requests.TrackRequest;
-
-import java.util.List;
 
 public class Main {
     public static void main(String[] args)
@@ -19,6 +16,7 @@ public class Main {
         GenreEntity genreEntity = new GenreEntity();
         genreEntity.setName("Rock");
         dataBase.addGenre(genreEntity);
+        TrackRequest trackRequest = new TrackRequest(dataBase);
 
 
 

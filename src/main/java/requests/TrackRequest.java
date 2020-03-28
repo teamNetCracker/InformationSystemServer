@@ -7,6 +7,7 @@ import data.TrackEntity;
 import model.DataBase;
 import model.TrackDAO;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,12 +15,12 @@ import javax.ws.rs.core.Response;
 @Path("/track")
 public class TrackRequest {
 
+    private DataBase dataBase;
 
-    /*private DataBase dataBase;
-
+    @Inject
     public TrackRequest(DataBase dataBase) {
         this.dataBase = dataBase;
-    }*/
+    }
 
     @GET
     @Path("/getTrack/{id}")
@@ -42,8 +43,8 @@ public class TrackRequest {
 
     @DELETE
     @Path("/deleteTrack/{id}")
-    public void deleteTrack(@PathParam("id") String id) {
-
+    public String deleteTrack(@PathParam("id") String id) {
+        return "Delete " + id;
     }
 
 
