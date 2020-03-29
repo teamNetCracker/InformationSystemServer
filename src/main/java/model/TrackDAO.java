@@ -11,9 +11,7 @@ import utils.HibernateSessionFactory;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TrackDAO
-{
-    public void addTrack(TrackEntity newTrack)
+public void addTrack(TrackEntity newTrack)
     {
         Session session = null;
         try {
@@ -136,7 +134,7 @@ public class TrackDAO
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
             Query query = session.createQuery("DELETE  TracksEntity WHERE idTracks = :id")
-                    .setInteger("id", new Integer(id));
+                    .setInteger("id", id);
             int rows = query.executeUpdate();
             session.getTransaction().commit();
         }
@@ -150,10 +148,10 @@ public class TrackDAO
             }
         }
     }
-    public List getAllTracks()
+    public List<TrackEntity> getAllTracks()
     {
         Session session = null;
-        List tracks = new LinkedList<>();
+        List<TrackEntity> tracks = new LinkedList<>();
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
@@ -173,7 +171,7 @@ public class TrackDAO
     }
     public List<TrackEntity> searchTracksByGenre(int idGenre) {
         Session session = null;
-        List tracks = new LinkedList<>();
+        List<TrackEntity> tracks = new LinkedList<>();
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
@@ -191,4 +189,3 @@ public class TrackDAO
         }
         return tracks;
     }
-}
