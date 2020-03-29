@@ -1,9 +1,11 @@
 package model;
 
+import data.GenreDataObject;
 import data.GenreEntity;
 import data.TrackDataObject;
 import data.TrackEntity;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class DataBase {
