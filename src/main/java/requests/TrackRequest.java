@@ -1,13 +1,14 @@
 package requests;
 
 
+import com.google.inject.Inject;
 import data.GenreDataObject;
 import data.TrackDataObject;
 import data.TrackEntity;
 import model.DataBase;
+import model.DataBaseInterface;
 import model.TrackDAO;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,30 +16,21 @@ import javax.ws.rs.core.Response;
 @Path("/track")
 public class TrackRequest {
 
-    private DataBase dataBase;
-
     @Inject
-    public TrackRequest(DataBase dataBase) {
-        this.dataBase = dataBase;
-    }
+    private DataBaseInterface dataBase;
 
     @GET
     @Path("/getTrack/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public TrackDataObject getTrack(@PathParam("id") String id) {
-
-        String output = "Get track request " + id;
-        //TrackEntity trackEntity = dataBase.getTrack(Integer.parseInt(id));
-        return new TrackDataObject("3","234","23","5555",new GenreDataObject("rock"),23);
+        return dataBase.getTrack(Integer.parseInt(id));
     }
 
     @POST
     @Path("/addTrack")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createTrackInJSON(TrackDataObject track) {
-
-        String result = "Track saved : " + track;
-        return Response.status(201).entity(result).build();
+    public void createTrackInJSON(TrackDataObject track) {
+        dataBase.addTrack(track);
     }
 
     @DELETE
@@ -48,6 +40,8 @@ public class TrackRequest {
     }
 
 
-
+    public void setDataBase(DataBaseInterface dataBase) {
+        this.dataBase = dataBase;
+    }
 }
 

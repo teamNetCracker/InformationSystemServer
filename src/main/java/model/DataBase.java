@@ -8,7 +8,7 @@ import data.TrackEntity;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DataBase {
+public class DataBase implements DataBaseInterface{
     private GenreDAO genreDAO;
     private TrackDAO trackDAO;
 

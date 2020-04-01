@@ -1,5 +1,7 @@
 
+import data.GenreDataObject;
 import data.GenreEntity;
+import data.TrackDataObject;
 import model.DataBase;
 import model.GenreDAO;
 import model.TrackDAO;
@@ -11,12 +13,10 @@ public class Main {
         GenreDAO Dao = new GenreDAO();
         TrackDAO DaoT = new TrackDAO();
         DataBase dataBase = new DataBase();
-        dataBase.setTrackDAO(DaoT);
-        dataBase.setGenreDAO(Dao);
-        GenreEntity genreEntity = new GenreEntity();
-        genreEntity.setName("Rock");
-        dataBase.addGenre(genreEntity);
-        TrackRequest trackRequest = new TrackRequest(dataBase);
+        TrackDataObject trackDataObject = new TrackDataObject("20","lola","kot","sos",new GenreDataObject("11","Rock"),44);
+        TrackRequest trackRequest = new TrackRequest();
+        trackRequest.setDataBase(dataBase);
+
 
 
 
