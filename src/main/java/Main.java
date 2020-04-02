@@ -14,6 +14,7 @@ public class Main {
         TrackDAO DaoT = new TrackDAO();
         DataBase dataBase = new DataBase();
         TrackDataObject trackDataObject = new TrackDataObject("20","lola","kot","sos",new GenreDataObject("11","Rock"),44);
+        dataBase.addTrack(trackDataObject);
         TrackRequest trackRequest = new TrackRequest();
         trackRequest.setDataBase(dataBase);
 

@@ -12,6 +12,7 @@ import model.TrackDAO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/track")
 public class TrackRequest {
@@ -26,17 +27,56 @@ public class TrackRequest {
         return dataBase.getTrack(Integer.parseInt(id));
     }
 
+
     @POST
     @Path("/addTrack")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createTrackInJSON(TrackDataObject track) {
+    public boolean createTrackInJSON(TrackDataObject track) {
         dataBase.addTrack(track);
+        return true;
     }
 
     @DELETE
     @Path("/deleteTrack/{id}")
-    public String deleteTrack(@PathParam("id") String id) {
-        return "Delete " + id;
+    public boolean deleteTrack(@PathParam("id") String id) {
+        dataBase.deleteTrack(Integer.parseInt(id));
+        return true;
+    }
+
+    @PUT
+    @Path("/updateTrack")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean updateTrack(TrackDataObject trackDataObject) {
+        dataBase.updateTrack(trackDataObject);
+        return true;
+    }
+
+    @GET
+    @Path("/searchTrack/{title}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TrackDataObject> searchTrack(@PathParam("title") String title) {
+        return dataBase.searchTrack(title);
+    }
+
+    @GET
+    @Path("/getAllTracks")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TrackDataObject> getAllTracks() {
+        return dataBase.getAllTracks();
+    }
+
+    @GET
+    @Path("/searchTrackByGenreTitle/{title}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TrackDataObject> searchTrackByGenreTitle(@PathParam("title") String title) {
+        return dataBase.searchTrackByGenre(title);
+    }
+
+    @GET
+    @Path("/searchTrackByGenreId/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TrackDataObject> searchTrackByGenreId(@PathParam("id") String id) {
+        return dataBase.searchTrackByGenre(Integer.parseInt(id));
     }
 
 

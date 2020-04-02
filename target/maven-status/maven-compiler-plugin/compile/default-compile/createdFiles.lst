@@ -1,3 +1,4 @@
+requests\GenreRequest.class
 requests\TrackRequest.class
 server\ServerConnection$Callback.class
 requests\GuiceModule.class
