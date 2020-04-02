@@ -49,7 +49,7 @@ public class TrackDAO {
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            Query query = session.createQuery("from TracksEntity where Title = :title")
+            Query query = session.createQuery("from TrackEntity where Title = :title")
                     .setString("title", title);
             tracks = query.list();
             session.getTransaction().commit();
@@ -93,7 +93,7 @@ public class TrackDAO {
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            Query query = session.createQuery("from TracksEntity where idTracks = :id")
+            Query query = session.createQuery("from TrackEntity where idTracks = :id")
                     .setInteger("id", id);
             track = (TrackEntity) query.uniqueResult();
             session.getTransaction().commit();
@@ -112,7 +112,7 @@ public class TrackDAO {
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             session.beginTransaction();
-            Query query = session.createQuery("DELETE  TracksEntity WHERE idTracks = :id")
+            Query query = session.createQuery("DELETE  TrackEntity WHERE idTracks = :id")
                     .setInteger("id", id);
             int rows = query.executeUpdate();
             session.getTransaction().commit();
