@@ -8,6 +8,7 @@
     <modules>
         <module>DataBaseService</module>
         <module>REST</module>
+        <module>Frontend</module>
     </modules>
 
     <properties>
