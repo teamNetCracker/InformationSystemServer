@@ -1,8 +1,12 @@
 <p>track-list works!</p>
 <table>
     <tr *ngFor="let track of trackListData.tracks">
-      <th>{{track.name}}</th>
-      <th>{{track.author}}</th>
+      <th>{{track.id}}</th>
+      <th>{{track.title}}</th>
+      <th>{{track.performer}}</th>
+      <th>{{track.album}}</th>
+      <th>{{track.duration}}</th>
+      <th>{{track.GenreDataObject.id}}</th>
       <th>
         <button (click)="removeTrack(track)">
           Delete
@@ -12,7 +16,10 @@
 </table>
 Name:<input #nameInput type = "text"/>
 Author:<input #authorInput type = "text"/>
-<button (click)="addTrack(nameInput.value, authorInput.value)">
+Album:<input #albumInput type = "text"/>
+Genre:<input #authorInput type = "text"/>
+Author:<input #authorInput type = "text"/>
+<button (click)="addTrack(nameInput.value, authorInput.value, null,null,null,null)">
   Add
 </button>
 

@@ -17,7 +17,7 @@ export class GenreListEpicFactory {
       return action$.pipe(
         ofType(GenreListActions.LOAD_GENRES),
         mergeMap(action =>
-          this.http.get('server/genres')
+          this.http.get('rest/genre/getAllGenres')
             .pipe(map(loadedGenres => loadedGenres as Genre[]))
             .pipe(map(loadedGenres => {
               return this.genreListActions.setLoadedGenres(loadedGenres);

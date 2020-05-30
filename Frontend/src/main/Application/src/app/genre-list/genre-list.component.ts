@@ -23,8 +23,8 @@ export class GenreListComponent implements OnInit {
     this.ngRedux.dispatch(this.genreListActions.loadGenres());
   }
 
-  addGenre(name: string) {
-    this.ngRedux.dispatch(this.genreListActions.addGenre(new Genre(name)));
+  addGenre(name: string, id: string) {
+    this.ngRedux.dispatch(this.genreListActions.addGenre(new Genre(name, id)));
   }
 
   removeGenre(genre: Genre) {

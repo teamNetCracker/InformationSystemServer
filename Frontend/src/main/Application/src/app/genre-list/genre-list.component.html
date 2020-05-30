@@ -1,7 +1,8 @@
 <p>genre-list works!</p>
 <table>
   <tr *ngFor="let genre of genreListData.genres">
-    <th>{{genre.name}}</th>
+    <th>{{genre.id}}</th>
+    <th>{{genre.title}}</th>
     <th>
       <button (click)="removeGenre(genre)">
         Delete
@@ -10,7 +11,7 @@
   </tr>
 </table>
 Name:<input #nameInput type = "text"/>
-<button (click)="addGenre(nameInput.value)">
+<button (click)="addGenre(nameInput.value, null)">
   Add
 </button>
 

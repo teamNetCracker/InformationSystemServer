@@ -7,6 +7,7 @@ export class GenreListData {
 }
 
 export class Genre {
-  constructor(public name: string) {
+  constructor(public title: string,
+              public id: string) {
   }
 }

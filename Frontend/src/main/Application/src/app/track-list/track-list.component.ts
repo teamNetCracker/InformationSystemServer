@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import { NgRedux, select } from '@angular-redux/store';
 import {AppState} from '../state/app.types';
 import {TrackListActions} from './track-list.action';
+import {Genre} from "../genre-list/genre-list.data";
 
 @Component({
   selector: 'app-track-list',
@@ -23,8 +24,8 @@ export class TrackListComponent implements OnInit {
     this.ngRedux.dispatch(this.trackListActions.loadTracks());
   }
 
-  addTrack(name: string, author: string) {
-    this.ngRedux.dispatch(this.trackListActions.addTrack(new Track(name, author)));
+  addTrack(name: string, author: string, id:string, album:string, genre:Genre, duration:number) {
+    this.ngRedux.dispatch(this.trackListActions.addTrack(new Track(id,name, author, album, genre, duration)));
   }
 
   removeTrack(track: Track) {

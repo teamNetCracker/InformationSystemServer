@@ -6,7 +6,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("")
+@ApplicationPath("/blet")
 public class Config extends ResourceConfig {
     public Config() {
         packages("requests");
