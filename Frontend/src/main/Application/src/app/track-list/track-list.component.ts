@@ -5,6 +5,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import {AppState} from '../state/app.types';
 import {TrackListActions} from './track-list.action';
 import {Genre} from "../genre-list/genre-list.data";
+import {trackListService} from "./track-list.service";
 
 @Component({
   selector: 'app-track-list',
@@ -15,7 +16,7 @@ export class TrackListComponent implements OnInit {
   @select(['trackListState', 'trackListData']) readonly trackListData$: Observable<TrackListData>;
   trackListData: TrackListData;
 
-  constructor(private ngRedux: NgRedux<AppState>, private trackListActions: TrackListActions) { }
+  constructor(private ngRedux: NgRedux<AppState>, private trackListActions: TrackListActions, private trackService: trackListService) { }
 
   ngOnInit(): void {
     this.trackListData$.subscribe((trackListData: TrackListData) => {
@@ -24,11 +25,15 @@ export class TrackListComponent implements OnInit {
     this.ngRedux.dispatch(this.trackListActions.loadTracks());
   }
 
-  addTrack(name: string, author: string, id:string, album:string, genre:Genre, duration:number) {
-    this.ngRedux.dispatch(this.trackListActions.addTrack(new Track(id,name, author, album, genre, duration)));
+  addTrack(name: string, author: string, id:string, album:string, duration:string, idGenre:string, nameGenre: string) {
+    let track = new Track(id, name, author, album, new Genre(nameGenre, idGenre), parseInt(duration));
+    this.trackService.addTrack(track).subscribe();
+    console.log("test");
+    this.ngRedux.dispatch(this.trackListActions.addTrack(track));
   }
 
   removeTrack(track: Track) {
+    this.trackService.deleteTrack(track.id).subscribe();
     this.ngRedux.dispatch(this.trackListActions.removeTrack(track));
   }
 

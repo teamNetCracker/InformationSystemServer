@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {GenreListEpicFactory} from './genre-list/genre-list.epic';
 import {GenreListActions} from './genre-list/genre-list.actions';
 import {GenreListModule} from './genre-list/genre-list.module';
+import {trackListService} from "./track-list/track-list.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import {GenreListModule} from './genre-list/genre-list.module';
     StateModule,
     HttpClientModule,
   ],
-  providers: [TrackListEpicFactory, TrackListActions, GenreListEpicFactory, GenreListActions],
+  providers: [TrackListEpicFactory, TrackListActions, GenreListEpicFactory, GenreListActions, trackListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

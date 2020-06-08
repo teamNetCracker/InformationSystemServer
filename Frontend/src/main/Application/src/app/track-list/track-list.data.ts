@@ -13,7 +13,7 @@ export class Track {
               public title: string,
               public performer: string,
               public album: string,
-              public GenreDataObject: Genre,
+              public genre: Genre,
               public duration: number) {
   }
 }

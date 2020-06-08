@@ -1,5 +1,6 @@
 package data;
 
+
 import java.io.Serializable;
 
 public class TrackDataObject implements Serializable {
@@ -9,6 +10,11 @@ public class TrackDataObject implements Serializable {
     private String album;
     private GenreDataObject genre;
     private Integer duration;
+
+    public TrackDataObject() {
+        super();
+    }
+
 
     public TrackDataObject(String id, String title, String performer, String album, GenreDataObject genre, Integer duration) {
         this.id = id;

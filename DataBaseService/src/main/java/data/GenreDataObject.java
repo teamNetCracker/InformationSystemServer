@@ -5,6 +5,11 @@ import java.io.Serializable;
 public class GenreDataObject implements Serializable{
     private String title;
     private String id;
+
+    public GenreDataObject() {
+        super();
+    }
+
     public GenreDataObject(String title)
     {
         this.title = title;

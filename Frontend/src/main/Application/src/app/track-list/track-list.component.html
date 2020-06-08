@@ -6,7 +6,8 @@
       <th>{{track.performer}}</th>
       <th>{{track.album}}</th>
       <th>{{track.duration}}</th>
-      <th>{{track.GenreDataObject.id}}</th>
+      <th>{{track.genre.id}}</th>
+      <th>{{track.genre.title}}</th>
       <th>
         <button (click)="removeTrack(track)">
           Delete
@@ -17,9 +18,11 @@
 Name:<input #nameInput type = "text"/>
 Author:<input #authorInput type = "text"/>
 Album:<input #albumInput type = "text"/>
-Genre:<input #authorInput type = "text"/>
-Author:<input #authorInput type = "text"/>
-<button (click)="addTrack(nameInput.value, authorInput.value, null,null,null,null)">
+Genre id:<input #genreIdInput type = "text"/>
+Name Genre:<input #nameGenre>
+Duration:<input #durationInput>
+
+<button (click)="addTrack(nameInput.value, authorInput.value, null, albumInput.value, durationInput.value, genreIdInput.value, nameGenre.value)">
   Add
 </button>
 
