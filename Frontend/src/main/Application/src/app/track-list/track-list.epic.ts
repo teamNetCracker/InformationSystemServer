@@ -12,6 +12,7 @@ import {Action} from 'redux';
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {Track} from './track-list.data';
 import {pipe} from "rxjs";
+import {GenreListActions} from "../genre-list/genre-list.actions";
 
 @Injectable()
 export class TrackListEpicFactory {
@@ -22,7 +23,7 @@ export class TrackListEpicFactory {
   createLoadTracksEpic(): Epic<Action, Action> {
     return action$ => {
       return action$.pipe(
-        ofType(TrackListActions.LOAD_TRACKS),
+        ofType(TrackListActions.LOAD_TRACKS || GenreListActions.REMOVE_GENRE),
         mergeMap(action =>
           this.http.get('rest/track/getAllTracks')
             .pipe(map(loadedTracks => loadedTracks as Track[]))

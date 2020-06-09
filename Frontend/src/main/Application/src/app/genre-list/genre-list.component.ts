@@ -30,4 +30,11 @@ export class GenreListComponent implements OnInit {
   removeGenre(genre: Genre) {
     this.ngRedux.dispatch(this.genreListActions.removeGenre(genre));
   }
+
+  findGenre(findName: string)
+  {
+    this.ngRedux.dispatch(this.genreListActions.findGenre(findName));
+  }
+
+
 }

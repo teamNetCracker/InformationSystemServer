@@ -25,10 +25,6 @@ export class TrackListComponent implements OnInit {
     this.ngRedux.dispatch(this.trackListActions.loadTracks());
   }
 
-  loadTracks()
-  {
-    this.ngRedux.dispatch(this.trackListActions.loadTracks());
-  }
 
   updateTrack(track: Track)
   {
@@ -44,6 +40,7 @@ export class TrackListComponent implements OnInit {
   removeTrack(track: Track) {
     this.ngRedux.dispatch(this.trackListActions.removeTrack(track));
   }
+  
   findTrack(findName: string)
   {
     this.ngRedux.dispatch(this.trackListActions.findTrack(findName));

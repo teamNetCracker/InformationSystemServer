@@ -14,6 +14,8 @@ import {
 } from "../track-list/track-list.action";
 import {Track} from "../track-list/track-list.data";
 
+
+
 @Injectable()
 export class GenreListEpicFactory {
   constructor(private http: HttpClient,
@@ -28,6 +30,7 @@ export class GenreListEpicFactory {
           this.http.get('rest/genre/getAllGenres')
             .pipe(map(loadedGenres => loadedGenres as Genre[]))
             .pipe(map(loadedGenres => {
+
               return this.genreListActions.setLoadedGenres(loadedGenres);
             }))
         )

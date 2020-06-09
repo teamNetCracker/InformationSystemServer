@@ -30,7 +30,10 @@ export class StateModule {
       this.genreListEpicFactory.createLoadGenresEpic(),
       this.trackEpicFactory.searchTrackEpic(),
       this.trackEpicFactory.removeTrackEpic(),
-      this.trackEpicFactory.addTrackEpic()
+      this.trackEpicFactory.addTrackEpic(),
+      this.genreListEpicFactory.addGenreEpic(),
+      this.genreListEpicFactory.removeGenreEpic(),
+      this.genreListEpicFactory.searchGenreEpic()
     ))
     ;
   }

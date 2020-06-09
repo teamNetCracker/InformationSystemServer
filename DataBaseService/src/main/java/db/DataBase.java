@@ -40,7 +40,10 @@ public class DataBase implements DataBaseInterface{
         GenreDataObject genreDO = track.getGenre();
         GenreEntity genreEntity = new GenreEntity();
         genreEntity.setName(genreDO.getTitle());
-        genreEntity.setIdGenre(Integer.parseInt(genreDO.getId()));
+        if (track.getGenre().getId() != null)
+        {
+            genreEntity.setIdGenre(Integer.parseInt(genreDO.getId()));
+        }
         TrackEntity trackEntity = new TrackEntity();
         if (track.getId() != null) {
             trackEntity.setIdTracks(Integer.parseInt(track.getId()));
@@ -59,7 +62,9 @@ public class DataBase implements DataBaseInterface{
     private GenreEntity transformToGenreEntity(GenreDataObject genre)
     {
         GenreEntity genreEntity = new GenreEntity();
-        genreEntity.setIdGenre(Integer.parseInt(genre.getId()));
+        if (genre.getId() != null) {
+            genreEntity.setIdGenre(Integer.parseInt(genre.getId()));
+        }
         genreEntity.setName(genre.getTitle());
         return genreEntity;
     }
