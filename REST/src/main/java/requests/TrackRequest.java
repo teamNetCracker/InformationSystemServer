@@ -1,6 +1,7 @@
 package requests;
 
 
+
 import com.google.inject.Inject;
 import data.GenreDataObject;
 import data.TrackDataObject;
@@ -15,12 +16,12 @@ import java.util.List;
 @Path("/track")
 public class TrackRequest {
 
-    @Inject
+
     private DataBaseInterface dataBase;
 
     public TrackRequest()
     {
-        this.dataBase = new DataBase();
+       this.dataBase = new DataBase();
     }
 
     @GET

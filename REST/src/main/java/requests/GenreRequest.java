@@ -1,9 +1,12 @@
 package requests;
 
+
+
 import com.google.inject.Inject;
 import data.GenreDataObject;
 import db.DataBase;
 import db.DataBaseInterface;
+
 
 
 import javax.ws.rs.*;
@@ -13,10 +16,11 @@ import java.util.List;
 @Path("/genre")
 public class GenreRequest {
 
-    @Inject
+
     private DataBaseInterface dataBase;
 
     public GenreRequest() {
+
         this.dataBase = new DataBase();
     }
 

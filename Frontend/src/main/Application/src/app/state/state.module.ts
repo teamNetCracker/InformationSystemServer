@@ -28,7 +28,9 @@ export class StateModule {
     epicMiddleware.run(combineEpics(
       this.trackEpicFactory.createLoadTracksEpic(),
       this.genreListEpicFactory.createLoadGenresEpic(),
-      this.trackEpicFactory.searchTrackEpic()
+      this.trackEpicFactory.searchTrackEpic(),
+      this.trackEpicFactory.removeTrackEpic(),
+      this.trackEpicFactory.addTrackEpic()
     ))
     ;
   }
