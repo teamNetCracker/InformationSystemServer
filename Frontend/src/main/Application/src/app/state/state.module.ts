@@ -27,7 +27,8 @@ export class StateModule {
     ngRedux.provideStore(store);
     epicMiddleware.run(combineEpics(
       this.trackEpicFactory.createLoadTracksEpic(),
-      this.genreListEpicFactory.createLoadGenresEpic()
+      this.genreListEpicFactory.createLoadGenresEpic(),
+      this.trackEpicFactory.searchTrackEpic()
     ))
     ;
   }

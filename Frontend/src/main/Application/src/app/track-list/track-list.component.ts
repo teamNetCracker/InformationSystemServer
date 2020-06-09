@@ -36,5 +36,10 @@ export class TrackListComponent implements OnInit {
     this.trackService.deleteTrack(track.id).subscribe();
     this.ngRedux.dispatch(this.trackListActions.removeTrack(track));
   }
+  findTrack(findName: string)
+  {
+    this.ngRedux.dispatch(this.trackListActions.findTrack(findName));
+  }
+
 
 }

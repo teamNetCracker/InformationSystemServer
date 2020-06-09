@@ -8,6 +8,7 @@ export class TrackListActions {
   static readonly REMOVE_TRACK: string = 'REMOVE_TRACK';
   static readonly LOAD_TRACKS: string = 'LOAD_TRACKS';
   static readonly SET_LOADED_TRACKS: string = 'SET_LOADED_TRACKS';
+  static readonly FIND_TRACK: string = 'FIND_TRACK'
 
   addTrack(track: Track): AddTrackAction {
     return {track, type: TrackListActions.ADD_TRACK};
@@ -19,6 +20,11 @@ export class TrackListActions {
 
   loadTracks(): LoadTracksAction {
     return {type: TrackListActions.LOAD_TRACKS};
+  }
+
+  findTrack(findName: string): FindTrackAction
+  {
+    return {findName, type: TrackListActions.FIND_TRACK}
   }
 
   setLoadedTracks(tracks: Track[]): SetLoadedTracksAction {
@@ -35,6 +41,10 @@ export interface AddTrackAction extends TrackListAction {
 
 export interface RemoveTrackAction extends TrackListAction {
   track: Track;
+}
+
+export interface FindTrackAction extends TrackListAction {
+  findName: string;
 }
 
 export interface LoadTracksAction extends TrackListAction {
