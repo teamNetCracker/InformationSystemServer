@@ -1,17 +1,28 @@
-<p>genre-list works!</p>
-<table >
+
+<p>
+  Добавление и изменение жанров: <br>
+  Название:<input #nameInput type = "text"/>
+  <button (click)="addGenre(nameInput.value, null)">
+    Add
+  </button> <br>
+  Ведите название жанра для поиска: <br>
+  Название жанра:<input #findInput type = "text"/>
+  <button (click)="findGenre(findInput.value)"> Искать </button>
+</p>
+<table class = "table_genres">
+  <caption> Genres </caption>
+  <tr>
+    <th> Жанр</th>
+  </tr>
   <tr *ngFor="let genre of genreListData.genres">
-    <th>{{genre.id}}</th>
-    <th>{{genre.title}}</th>
-    <th>
+    <td>{{genre.title}}</td>
+    <td>
       <button (click)="removeGenre(genre)">
         Delete
       </button>
-    </th>
+    </td>
+    <td>
+      <button (click)="updateGenre(genre.id, nameInput.value)">Изменить</button>
+    </td>
   </tr>
 </table>
-Name:<input #nameInput type = "text"/>
-<button (click)="addGenre(nameInput.value, null)">
-  Add
-</button>
-

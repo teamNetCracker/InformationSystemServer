@@ -1,31 +1,45 @@
-<p>track-list works!</p>
-<table>
-    <tr *ngFor="let track of trackListData.tracks">
-      <th>{{track.id}}</th>
-      <th>{{track.title}}</th>
-      <th>{{track.performer}}</th>
-      <th>{{track.album}}</th>
-      <th>{{track.duration}}</th>
-      <th>{{track.genre.id}}</th>
-      <th>{{track.genre.title}}</th>
-      <th>
-        <button (click)="removeTrack(track)">
-          Delete
-        </button>
-      </th>
-    </tr>
+<p> Name:<input #nameInput type = "text"/> <br><br/>
+  Author:<input #authorInput type = "text"/> <br> <br/>
+  Album:<input #albumInput type = "text"/>  <br> <br/>
+  Duration: <input #durationInput type = "text"> <br> <br/>
+  <select #input name="genre_select" >
+    <option *ngFor="let genre of genreListData.genres" value="{{genre.id}}" > {{genre.title}} </option>
+  </select> <br> <br/>
+  <button (click)="addTrack(nameInput.value, authorInput.value, null, albumInput.value, durationInput.value, input.value, input.textContent)">
+    Add
+  </button> <br> <br/>
+  Введите название трека для поиска: <br>
+  <input #searchInput type = "text">
+  <button (click)="findTrack(searchInput.value)" > Искать</button>
+</p>
+
+<table class = "table_tracks">
+  <caption> Tracks </caption>
+  <tr>
+    <th>Название</th>
+    <th>Исполнитель</th>
+    <th>Альбом</th>
+    <th>Длительность</th>
+    <th>Жанр</th>
+    <th>Удаление</th>
+    <th>Изменить</th>
+  </tr>
+  <tr *ngFor="let track of trackListData.tracks">
+    <td>{{track.title}}</td>
+    <td>{{track.performer}}</td>
+    <td>{{track.album}}</td>
+    <td>{{track.duration}}</td>
+    <td>{{track.genre.title}}</td>
+    <td>
+      <button (click)="removeTrack(track)">
+        Delete
+      </button>
+    </td>
+    <td>
+      <button (click)="updateTrack(track.id, nameInput.value, authorInput.value, albumInput.value, durationInput.value, input.value, input.textContent)">Изменить</button>
+    </td>
+  </tr>
 </table>
-Name:<input #nameInput type = "text"/>
-Author:<input #authorInput type = "text"/>
-Album:<input #albumInput type = "text"/>
-Genre id:<input #genreIdInput type = "text"/>
-Name Genre:<input #nameGenre>
-Duration:<input #durationInput>
 
-<button (click)="addTrack(nameInput.value, authorInput.value, null, albumInput.value, durationInput.value, genreIdInput.value, nameGenre.value)">
-  Add
-</button>
 
-Find input :<input #searchInput type = "text">
-<button (click)="findTrack(searchInput.value)"> Find</button>
 

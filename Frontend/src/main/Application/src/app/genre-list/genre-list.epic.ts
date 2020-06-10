@@ -3,7 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {Epic, ofType} from 'redux-observable';
 import {Action} from 'redux';
 import {map, mergeMap} from 'rxjs/operators';
-import {AddGenreAction, GenreListActions, RemoveGenreAction} from './genre-list.actions';
+import {
+  AddGenreAction,
+  FindGenreAction,
+  GenreListActions,
+  RemoveGenreAction,
+  UpdateGenreAction
+} from './genre-list.actions';
 import {Genre} from './genre-list.data';
 import {
   AddTrackAction,
@@ -30,7 +36,6 @@ export class GenreListEpicFactory {
           this.http.get('rest/genre/getAllGenres')
             .pipe(map(loadedGenres => loadedGenres as Genre[]))
             .pipe(map(loadedGenres => {
-
               return this.genreListActions.setLoadedGenres(loadedGenres);
             }))
         )
@@ -67,11 +72,24 @@ export class GenreListEpicFactory {
     return action$ => {
       return action$.pipe(
         ofType(GenreListActions.FIND_GENRE),
-        mergeMap((action:FindTrackAction) =>
+        mergeMap((action:FindGenreAction) =>
           this.http.get(`rest/genre/searchGenre/${(action.findName)}`)
-            .pipe(map(loadedGenre => loadedGenre as Genre[]))
+            .pipe(map(loadedGenre => loadedGenre as Genre))
             .pipe(map(loadedGenre => {
-              return this.genreListActions.setLoadedGenres(loadedGenre);
+              return this.genreListActions.setFindGenre(loadedGenre);
+            }))
+        )
+      );
+    };
+  }
+  updateTrackEpic(): Epic<Action, Action> {
+    return action$ => {
+      return action$.pipe(
+        ofType(GenreListActions.UPDATE_GENRE),
+        mergeMap((action:UpdateGenreAction) =>
+          this.http.put(`rest/genre/updateGenre/`, action.genre)
+            .pipe(map((response:boolean) => {
+              return this.genreListActions.loadGenres();
             }))
         )
       );

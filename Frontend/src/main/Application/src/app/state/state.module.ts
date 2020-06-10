@@ -33,7 +33,9 @@ export class StateModule {
       this.trackEpicFactory.addTrackEpic(),
       this.genreListEpicFactory.addGenreEpic(),
       this.genreListEpicFactory.removeGenreEpic(),
-      this.genreListEpicFactory.searchGenreEpic()
+      this.genreListEpicFactory.searchGenreEpic(),
+      this.trackEpicFactory.updateTrackEpic(),
+      this.genreListEpicFactory.updateTrackEpic()
     ))
     ;
   }

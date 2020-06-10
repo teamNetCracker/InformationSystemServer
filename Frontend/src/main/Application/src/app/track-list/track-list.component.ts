@@ -4,7 +4,8 @@ import {Observable} from 'rxjs';
 import { NgRedux, select } from '@angular-redux/store';
 import {AppState} from '../state/app.types';
 import {TrackListActions} from './track-list.action';
-import {Genre} from "../genre-list/genre-list.data";
+import {Genre, GenreListData} from "../genre-list/genre-list.data";
+
 
 
 @Component({
@@ -14,7 +15,8 @@ import {Genre} from "../genre-list/genre-list.data";
 })
 export class TrackListComponent implements OnInit {
   @select(['trackListState', 'trackListData']) readonly trackListData$: Observable<TrackListData>;
-  trackListData: TrackListData;
+  @select(['genreListState', 'genreListData']) readonly genreListData$: Observable<GenreListData>;
+  trackListData: TrackListData; genreListData: GenreListData;
 
   constructor(private ngRedux: NgRedux<AppState>, private trackListActions: TrackListActions) { }
 
@@ -22,15 +24,19 @@ export class TrackListComponent implements OnInit {
     this.trackListData$.subscribe((trackListData: TrackListData) => {
       this.trackListData = trackListData;
     });
+    this.genreListData$.subscribe((genreListData: GenreListData) =>
+    {
+      this.genreListData = genreListData;
+    })
     this.ngRedux.dispatch(this.trackListActions.loadTracks());
   }
 
 
-  updateTrack(track: Track)
+  updateTrack(id: string, name:string,author:string, album:string, duration:string, idGenre:string, nameGenre:string)
   {
+    let track = new Track(id, name, author, album, new Genre(nameGenre, idGenre), parseInt(duration));
     this.ngRedux.dispatch(this.trackListActions.updateTrack(track));
   }
-
 
   addTrack(name: string, author: string, id:string, album:string, duration:string, idGenre:string, nameGenre: string) {
     let track = new Track(id, name, author, album, new Genre(nameGenre, idGenre), parseInt(duration));
@@ -40,7 +46,7 @@ export class TrackListComponent implements OnInit {
   removeTrack(track: Track) {
     this.ngRedux.dispatch(this.trackListActions.removeTrack(track));
   }
-  
+
   findTrack(findName: string)
   {
     this.ngRedux.dispatch(this.trackListActions.findTrack(findName));

@@ -36,5 +36,9 @@ export class GenreListComponent implements OnInit {
     this.ngRedux.dispatch(this.genreListActions.findGenre(findName));
   }
 
+  updateGenre(id:string, name:string)
+  {
+    this.ngRedux.dispatch(this.genreListActions.updateGenre(new Genre(name, id)));
+  }
 
 }

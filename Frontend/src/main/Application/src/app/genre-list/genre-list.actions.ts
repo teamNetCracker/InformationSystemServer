@@ -10,6 +10,7 @@ export class GenreListActions {
   static readonly SET_LOADED_GENRES: string = 'SET_LOADED_GENRES';
   static readonly FIND_GENRE: string = 'FIND_GENRE';
   static readonly UPDATE_GENRE: string = 'UPDATE_GENRE';
+  static readonly SET_FIND_GENRE: string = 'SET_FIND_GENRE'
 
   addGenre(genre: Genre): AddGenreAction {
     return {genre, type: GenreListActions.ADD_GENRE};
@@ -36,6 +37,10 @@ export class GenreListActions {
   {
     return {genre, type: GenreListActions.UPDATE_GENRE}
   }
+  setFindGenre(genre: Genre): SetFindGenreAction
+  {
+    return {genre, type: GenreListActions.SET_FIND_GENRE}
+  }
 }
 
 export interface GenreListAction extends Action {
@@ -61,6 +66,10 @@ export interface FindGenreAction extends GenreListAction{
 }
 
 export interface UpdateGenreAction extends GenreListAction{
+  genre: Genre;
+}
+export interface SetFindGenreAction  extends GenreListAction
+{
   genre: Genre;
 
 }
