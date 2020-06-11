@@ -11,6 +11,8 @@
 
   <input #findInput type = "text" placeholder="Поиск жанра по названию"/>
   <button (click)="findGenre(findInput.value)"> Искать </button>
+
+  <button (click)="updateGenreTable()"> Обновить таблицу жанров</button>
 </p>
 
 
@@ -33,4 +35,5 @@
     </td>
   </tr>
 </table>
-<button (click)="updateGenreTable()"> Обновить таблицу жанров</button>
+
+
