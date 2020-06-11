@@ -23,7 +23,22 @@ export class TrackListEpicFactory {
   createLoadTracksEpic(): Epic<Action, Action> {
     return action$ => {
       return action$.pipe(
-        ofType(TrackListActions.LOAD_TRACKS || GenreListActions.REMOVE_GENRE),
+        ofType(TrackListActions.LOAD_TRACKS),
+        mergeMap(action =>
+          this.http.get('rest/track/getAllTracks')
+            .pipe(map(loadedTracks => loadedTracks as Track[]))
+            .pipe(map(loadedTracks => {
+              return this.trackListActions.setLoadedTracks(loadedTracks);
+            }))
+        )
+      );
+    };
+  }
+  LoadTracksOnChangeGenreEpic(): Epic<Action, Action> {
+    return action$ => {
+      console.log("Вот тут, да");
+      return action$.pipe(
+        ofType(GenreListActions.REMOVE_GENRE),
         mergeMap(action =>
           this.http.get('rest/track/getAllTracks')
             .pipe(map(loadedTracks => loadedTracks as Track[]))

@@ -49,10 +49,15 @@ export class TrackListComponent implements OnInit {
     setTimeout(()=> this.isVisible = false,2500);
   }
 
+  updateTableTrack(): void
+  {
+    this.ngRedux.dispatch(this.trackListActions.loadTracks());
+  }
+
+
   updateTrack(id: string, name:string,author:string, album:string, duration:string, idGenre:string, nameGenre:string)
   {
-    if (this.checkInput(id) || this.checkInput(name) || this.checkInput(author)
-      || this.checkInput(album) || this.checkInput(duration) || this.checkInput(idGenre) || this.checkInput(nameGenre))
+    if (this.checkInput(name) || this.checkInput(author) || this.checkInput(album) || this.checkInput(duration))
     {
       this.showAlert("Вы заполнили не все поля");
     }
@@ -63,8 +68,7 @@ export class TrackListComponent implements OnInit {
   }
 
   addTrack(name: string, author: string, id:string, album:string, duration:string, idGenre:string, nameGenre: string) {
-    if (this.checkInput(id) || this.checkInput(name) || this.checkInput(author)
-      || this.checkInput(album) || this.checkInput(duration) || this.checkInput(idGenre) || this.checkInput(nameGenre))
+    if (this.checkInput(name) || this.checkInput(author) || this.checkInput(album) || this.checkInput(duration) )
     {
       this.showAlert("Вы заполнили не все поля");
     }

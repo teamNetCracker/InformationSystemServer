@@ -25,6 +25,7 @@ export class GenreListComponent implements OnInit {
     });
     this.ngRedux.dispatch(this.genreListActions.loadGenres());
   }
+
   checkInput(input:string): boolean
   {
     return (!input || /^\s*$/.test(input));
@@ -38,6 +39,11 @@ export class GenreListComponent implements OnInit {
     this.message = message;
     setTimeout(()=> this.isVisible = false,2500);
   }
+
+    updateGenreTable(): void
+    {
+      this.ngRedux.dispatch(this.genreListActions.loadGenres());
+    }
 
 
   addGenre(name: string, id: string) {

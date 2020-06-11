@@ -66,6 +66,9 @@ button{
 .table_genres tr:nth-child(2n) {
   background: #E5E5E5;
 }
+.table_genres tr:nth-child(2n+1) {
+  background: #009926;
+}
 .table_genres td:last-of-type {
   text-align: center;
 }

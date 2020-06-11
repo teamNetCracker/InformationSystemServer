@@ -74,6 +74,9 @@ button{
 .table_tracks tr:nth-child(2n) {
   background: #E5E5E5;
 }
+.table_tracks tr:nth-child(2n+1) {
+  background: #009926;
+}
 .table_tracks td:last-of-type {
   text-align: center;
 }
