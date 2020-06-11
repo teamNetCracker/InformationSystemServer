@@ -72,10 +72,10 @@ button{
   font-size: 18px;
 }
 .table_tracks tr:nth-child(2n) {
-  background: #E5E5E5;
+  background: #EAF2F5;
 }
 .table_tracks tr:nth-child(2n+1) {
-  background: #009926;
+  background: #bbbbbb;
 }
 .table_tracks td:last-of-type {
   text-align: center;
