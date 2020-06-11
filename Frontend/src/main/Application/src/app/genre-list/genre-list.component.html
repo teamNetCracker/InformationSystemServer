@@ -2,15 +2,18 @@
   {{message}}
 </div>
 <p>
-  Добавление и изменение жанров: <br>
-  Название:<input #nameInput type = "text"/>
+
+  <input #nameInput type = "text" placeholder="Название"/>
   <button (click)="addGenre(nameInput.value, null)">
-    Add
+    Добавить
   </button> <br>
-  Ведите название жанра для поиска: <br>
-  Название жанра:<input #findInput type = "text"/>
+  <br>
+
+  <input #findInput type = "text" placeholder="Поиск жанра по названию"/>
   <button (click)="findGenre(findInput.value)"> Искать </button>
 </p>
+
+
 <table class = "table_genres">
   <caption> Genres </caption>
   <tr>

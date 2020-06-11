@@ -1,12 +1,50 @@
+p{
+  font-family: sans-serif;
+  width: 280px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+}
+
+
+input{
+  width: 100%;
+  overflow: hidden;
+  font-size: 20px;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #4caf50;
+}
+
+button{
+  width: 100%;
+  background: none;
+  border: 2px solid #4caf50;
+  border-radius: 25px;
+  color: white;
+  padding: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 12px 0;
+}
+
+
 .table_genres {
+  position: absolute;
+  top: 250px;
+  left: 43%;
   border-collapse: collapse;
-  border-left: 3px solid #F79361;
-  border-right: 3px solid #F79361;
-  border-bottom: 3px solid #F79361;
-  font-family: "Lucida Grande", sans-serif;
+  border-left: 3px solid #4caf50;
+  border-right: 3px solid #4caf50;
+  border-bottom: 3px solid #4caf50;
+  font-family: sans-serif;
 }
 .table_genres caption {
-  background: #F79361;
+  background: #4caf50;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 10px;
