@@ -43,12 +43,12 @@
     <td>{{track.duration}}</td>
     <td>{{track.genre.title}}</td>
     <td>
-      <button (click)="removeTrack(track)">
+      <button class="delete" (click)="removeTrack(track)">
         Удалить
       </button>
     </td>
     <td>
-      <button (click)="updateTrack(track.id, nameInput.value, authorInput.value, albumInput.value, durationInput.value, input.value, input.textContent)">Изменить</button>
+      <button class="change" (click)="updateTrack(track.id, nameInput.value, authorInput.value, albumInput.value, durationInput.value, input.value, input.textContent)">Изменить</button>
     </td>
   </tr>
 </table>

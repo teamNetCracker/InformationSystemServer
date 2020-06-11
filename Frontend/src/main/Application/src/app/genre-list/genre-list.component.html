@@ -26,12 +26,12 @@
   <tr *ngFor="let genre of genreListData.genres">
     <td>{{genre.title}}</td>
     <td>
-      <button (click)="removeGenre(genre)">
+      <button class="delete" (click)="removeGenre(genre)">
         Удалить
       </button>
     </td>
     <td>
-      <button (click)="updateGenre(genre.id, nameInput.value)">Изменить</button>
+      <button class="change" (click)="updateGenre(genre.id, nameInput.value)">Изменить</button>
     </td>
   </tr>
 </table>
