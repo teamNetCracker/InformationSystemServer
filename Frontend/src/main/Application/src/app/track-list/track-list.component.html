@@ -1,7 +1,10 @@
-<p> Name:<input #nameInput type = "text"/> <br><br/>
-  Author:<input #authorInput type = "text"/> <br> <br/>
-  Album:<input #albumInput type = "text"/>  <br> <br/>
-  Duration: <input #durationInput type = "text"> <br> <br/>
+<div class="alert" [class.visible]="isVisible">
+  {{message}}
+</div>
+<p> Название:<input #nameInput type = "text"/> <br><br/>
+  Исполнитель:<input #authorInput type = "text"/> <br> <br/>
+  Aльбом:<input #albumInput type = "text"/>  <br> <br/>
+  Длительность трека: <input #durationInput type = "text"> <br> <br/>
   <select #input name="genre_select" >
     <option *ngFor="let genre of genreListData.genres" value="{{genre.id}}" > {{genre.title}} </option>
   </select> <br> <br/>
@@ -14,7 +17,7 @@
 </p>
 
 <table class = "table_tracks">
-  <caption> Tracks </caption>
+  <caption> Аудиотреки </caption>
   <tr>
     <th>Название</th>
     <th>Исполнитель</th>
@@ -32,7 +35,7 @@
     <td>{{track.genre.title}}</td>
     <td>
       <button (click)="removeTrack(track)">
-        Delete
+        Удалить
       </button>
     </td>
     <td>

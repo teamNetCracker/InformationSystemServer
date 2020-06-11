@@ -5,6 +5,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import {AppState} from '../state/app.types';
 import {TrackListActions} from './track-list.action';
 import {Genre, GenreListData} from "../genre-list/genre-list.data";
+import {isEmpty} from "rxjs/operators";
 
 
 
@@ -20,6 +21,9 @@ export class TrackListComponent implements OnInit {
 
   constructor(private ngRedux: NgRedux<AppState>, private trackListActions: TrackListActions) { }
 
+  public isVisible: boolean = false;
+  public message: string = "";
+
   ngOnInit(): void {
     this.trackListData$.subscribe((trackListData: TrackListData) => {
       this.trackListData = trackListData;
@@ -31,16 +35,43 @@ export class TrackListComponent implements OnInit {
     this.ngRedux.dispatch(this.trackListActions.loadTracks());
   }
 
+  checkInput(input:string): boolean
+  {
+    return (!input || /^\s*$/.test(input));
+  }
+
+  showAlert(message:string) : void {
+    if (this.isVisible) {
+      return;
+    }
+    this.message = message;
+    this.isVisible = true;
+    setTimeout(()=> this.isVisible = false,2500);
+  }
 
   updateTrack(id: string, name:string,author:string, album:string, duration:string, idGenre:string, nameGenre:string)
   {
-    let track = new Track(id, name, author, album, new Genre(nameGenre, idGenre), parseInt(duration));
-    this.ngRedux.dispatch(this.trackListActions.updateTrack(track));
+    if (this.checkInput(id) || this.checkInput(name) || this.checkInput(author)
+      || this.checkInput(album) || this.checkInput(duration) || this.checkInput(idGenre) || this.checkInput(nameGenre))
+    {
+      this.showAlert("Вы заполнили не все поля");
+    }
+    else {
+      let track = new Track(id, name, author, album, new Genre(nameGenre, idGenre), parseInt(duration));
+      this.ngRedux.dispatch(this.trackListActions.updateTrack(track));
+    }
   }
 
   addTrack(name: string, author: string, id:string, album:string, duration:string, idGenre:string, nameGenre: string) {
-    let track = new Track(id, name, author, album, new Genre(nameGenre, idGenre), parseInt(duration));
-    this.ngRedux.dispatch(this.trackListActions.addTrack(track));
+    if (this.checkInput(id) || this.checkInput(name) || this.checkInput(author)
+      || this.checkInput(album) || this.checkInput(duration) || this.checkInput(idGenre) || this.checkInput(nameGenre))
+    {
+      this.showAlert("Вы заполнили не все поля");
+    }
+    else {
+      let track = new Track(id, name, author, album, new Genre(nameGenre, idGenre), parseInt(duration));
+      this.ngRedux.dispatch(this.trackListActions.addTrack(track));
+    }
   }
 
   removeTrack(track: Track) {
@@ -49,7 +80,13 @@ export class TrackListComponent implements OnInit {
 
   findTrack(findName: string)
   {
-    this.ngRedux.dispatch(this.trackListActions.findTrack(findName));
+    if (this.checkInput(findName))
+    {
+      this.showAlert("Вы не заполнили поле");
+    }
+    {
+      this.ngRedux.dispatch(this.trackListActions.findTrack(findName));
+    }
   }
 
 

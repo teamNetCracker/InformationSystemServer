@@ -16,15 +16,38 @@ export class GenreListComponent implements OnInit {
 
   constructor(private ngRedux: NgRedux<AppState>, private genreListActions: GenreListActions) { }
 
+  public isVisible: boolean = false;
+  public message: string = "";
+
   ngOnInit(): void {
     this.genreListData$.subscribe((genreListData: GenreListData) => {
       this.genreListData = genreListData;
     });
     this.ngRedux.dispatch(this.genreListActions.loadGenres());
   }
+  checkInput(input:string): boolean
+  {
+    return (!input || /^\s*$/.test(input));
+  }
+
+  showAlert(message: string) : void {
+    if (this.isVisible) {
+      return;
+    }
+    this.isVisible = true;
+    this.message = message;
+    setTimeout(()=> this.isVisible = false,2500);
+  }
+
 
   addGenre(name: string, id: string) {
-    this.ngRedux.dispatch(this.genreListActions.addGenre(new Genre(name, id)));
+    if (this.checkInput(name) && this.checkInput(id))
+    {
+      this.showAlert("Вы заполнил поле");
+    }
+    else {
+      this.ngRedux.dispatch(this.genreListActions.addGenre(new Genre(name, id)));
+    }
   }
 
   removeGenre(genre: Genre) {
@@ -33,7 +56,13 @@ export class GenreListComponent implements OnInit {
 
   findGenre(findName: string)
   {
-    this.ngRedux.dispatch(this.genreListActions.findGenre(findName));
+    if (this.checkInput(findName))
+    {
+      this.showAlert("Вы не заполнили поле");
+    }
+    else {
+      this.ngRedux.dispatch(this.genreListActions.findGenre(findName));
+    }
   }
 
   updateGenre(id:string, name:string)
