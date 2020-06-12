@@ -9,7 +9,7 @@ import {
 } from './track-list.action';
 import {ActionsObservable, Epic, ofType} from 'redux-observable';
 import {Action} from 'redux';
-import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
+import {catchError, delay, map, mergeMap, switchMap} from 'rxjs/operators';
 import {Track} from './track-list.data';
 import {pipe} from "rxjs";
 import {GenreListActions} from "../genre-list/genre-list.actions";
@@ -34,11 +34,11 @@ export class TrackListEpicFactory {
       );
     };
   }
-  LoadTracksOnChangeGenreEpic(): Epic<Action, Action> {
+  LoadTracksOnDeleteGenreEpic(): Epic<Action, Action> {
     return action$ => {
-      console.log("Вот тут, да");
       return action$.pipe(
         ofType(GenreListActions.REMOVE_GENRE),
+        delay(1000),
         mergeMap(action =>
           this.http.get('rest/track/getAllTracks')
             .pipe(map(loadedTracks => loadedTracks as Track[]))
@@ -50,6 +50,25 @@ export class TrackListEpicFactory {
     };
   }
 
+  LoadTracksOnChangeGenreEpic(): Epic<Action, Action> {
+    return action$ => {
+      return action$.pipe(
+        ofType(GenreListActions.UPDATE_GENRE),
+        delay(1000),
+        mergeMap(action =>
+          this.http.get('rest/track/getAllTracks')
+            .pipe(map(loadedTracks => loadedTracks as Track[]))
+            .pipe(map(loadedTracks => {
+              console.log("Измененеие");
+              return this.trackListActions.setLoadedTracks(loadedTracks);
+            }))
+        )
+      );
+    };
+  }
+
+
+
   addTrackEpic(): Epic<Action, Action> {
     return action$ => {
       return action$.pipe(
@@ -57,7 +76,6 @@ export class TrackListEpicFactory {
         mergeMap((action:AddTrackAction) =>
           this.http.post('rest/track/addTrack', action.track)
             .pipe(map((response) => {
-              console.log(response)
               return this.trackListActions.loadTracks();
             }))
         )

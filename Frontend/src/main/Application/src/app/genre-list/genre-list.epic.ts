@@ -82,7 +82,7 @@ export class GenreListEpicFactory {
       );
     };
   }
-  updateTrackEpic(): Epic<Action, Action> {
+  updateGenreEpic(): Epic<Action, Action> {
     return action$ => {
       return action$.pipe(
         ofType(GenreListActions.UPDATE_GENRE),

@@ -49,7 +49,7 @@ export class GenreListComponent implements OnInit {
   addGenre(name: string, id: string) {
     if (this.checkInput(name) && this.checkInput(id))
     {
-      this.showAlert("Вы заполнил поле");
+      this.showAlert("Вы не заполнили поле");
     }
     else {
       this.ngRedux.dispatch(this.genreListActions.addGenre(new Genre(name, id)));
@@ -73,7 +73,12 @@ export class GenreListComponent implements OnInit {
 
   updateGenre(id:string, name:string)
   {
-    this.ngRedux.dispatch(this.genreListActions.updateGenre(new Genre(name, id)));
+    if (this.checkInput(name))
+    {
+      this.showAlert("Вы не заполнили поле")
+    }
+    {
+      this.ngRedux.dispatch(this.genreListActions.updateGenre(new Genre(name, id)));
+    }
   }
-
 }

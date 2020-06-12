@@ -35,8 +35,9 @@ export class StateModule {
       this.genreListEpicFactory.removeGenreEpic(),
       this.genreListEpicFactory.searchGenreEpic(),
       this.trackEpicFactory.updateTrackEpic(),
-      this.genreListEpicFactory.updateTrackEpic(),
-      this.trackEpicFactory.LoadTracksOnChangeGenreEpic()
+      this.genreListEpicFactory.updateGenreEpic(),
+      this.trackEpicFactory.LoadTracksOnChangeGenreEpic(),
+      this.trackEpicFactory.LoadTracksOnDeleteGenreEpic()
     ))
     ;
   }
